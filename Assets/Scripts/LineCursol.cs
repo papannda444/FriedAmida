@@ -14,6 +14,14 @@ public class LineCursol : MonoBehaviour
 	int nowX = 0;
 	int nowY = 0;
 
+	enum Direction
+	{
+		Up = 1,
+		Down = 2,
+		Right = 3,
+		Left = 4
+	}
+
 	public int NowX
 	{
 		set
@@ -75,19 +83,19 @@ public class LineCursol : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-			NowY--;
+			MoveCursol(Direction.Up);
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			NowY++;
+			MoveCursol(Direction.Down);
 		}
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
-			NowX++;
+			MoveCursol(Direction.Right);
 		}
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			NowX--;
+			MoveCursol(Direction.Left);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Space))
@@ -98,17 +106,25 @@ public class LineCursol : MonoBehaviour
 
 	void DrawHLine()
 	{
-		//配列外を参照しないためにNowXを条件にしている
-		if (NowX < XHLines.Count - 1 && XHLines[NowX + 1].YHLines[NowY].GetComponent<HorizontalLine>().IsOnObjActive())
-		{
-			return;
-		}
-
-		if (NowX > 0 && XHLines[NowX - 1].YHLines[NowY].GetComponent<HorizontalLine>().IsOnObjActive())
-		{
-			return;
-		}
-
 		XHLines[NowX].YHLines[NowY].GetComponent<HorizontalLine>().OnObjActivation();
+	}
+
+	void MoveCursol(Direction dir)
+	{
+		switch (dir)
+		{
+			case Direction.Up:
+				NowY--;
+				break;
+			case Direction.Down:
+				NowY++;
+				break;
+			case Direction.Right:
+				NowX++;
+				break;
+			case Direction.Left:
+				NowX--;
+				break;
+		}
 	}
 }

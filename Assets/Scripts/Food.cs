@@ -71,13 +71,6 @@ public class Food : MonoBehaviour
 
 	void ChangeDirection(int x)
 	{
-		if (XDirection == 0)
-		{
-			XDirection = x;
-		}
-		else
-		{
-			XDirection = 0;
-		}
+		XDirection = XDirection != 0 ? 0 : x;
 	}
 }
