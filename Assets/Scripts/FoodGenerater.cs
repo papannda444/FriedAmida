@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FoodGenerater : MonoBehaviour
 {
-	[SerializeField] GameObject food;
-	[SerializeField] GameObject[] generateBox;
+	[SerializeField] GameObject[] foods;
+	[SerializeField] GameObject[] generatePlaces;
 	float time = 0;
 
     // Start is called before the first frame update
@@ -29,7 +29,18 @@ public class FoodGenerater : MonoBehaviour
 
 	void FoodGenerate()
 	{
-		int rand = Random.Range(0, generateBox.Length);
-		Instantiate(food, generateBox[rand].transform.position, Quaternion.identity);
+		GameObject item;
+		GameObject place;
+
+		//▼生成アイテムの決定
+		int rand = Random.Range(0, foods.Length);
+		item = foods[rand];
+
+		//▼生成位置の決定
+		rand = Random.Range(0, generatePlaces.Length);
+		place = generatePlaces[rand];
+
+		//▼生成
+		Instantiate(item, place.transform.position, Quaternion.identity);
 	}
 }
