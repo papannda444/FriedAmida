@@ -7,7 +7,13 @@ TagManager:
   - right
   - left
   - box
+  - egg
+  - komugiko
+  - panko
+  - badItem
   - food
+  - lowOil
+  - highOil
   layers:
   - Default
   - TransparentFX

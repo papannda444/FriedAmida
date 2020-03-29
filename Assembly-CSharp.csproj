@@ -62,7 +62,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Food.cs" />
     <Compile Include="Assets\Scripts\FoodGenerater.cs" />
+    <Compile Include="Assets\Scripts\FriedFood.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HorizontalLine.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\Scripts\ItemGenerater.cs" />
     <Compile Include="Assets\Scripts\LineCursol.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Game/FriedAmida/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
