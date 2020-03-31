@@ -901,6 +901,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3605081100778342537, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3605081100778342537, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3605081100778342537, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5849056
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d458e9f4bb0b0c74b885706c7f5b3610, type: 3}
 --- !u!4 &700609445 stripped
@@ -1865,6 +1880,7 @@ MonoBehaviour:
   - {fileID: 1942586033}
   - {fileID: 1910842211}
   - {fileID: 2057730658}
+  generateSpan: 3
 --- !u!4 &1419647446
 Transform:
   m_ObjectHideFlags: 0
@@ -2916,6 +2932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OilBox (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3605081100778342538, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+        type: 3}
+      propertyPath: m_TagString
+      value: moderateOil
       objectReference: {fileID: 0}
     - target: {fileID: 3605081100778342536, guid: d458e9f4bb0b0c74b885706c7f5b3610,
         type: 3}

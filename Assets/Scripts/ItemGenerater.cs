@@ -13,24 +13,18 @@ public class ItemGenerater : MonoBehaviour
 	[SerializeField] GameObject[] generatePlaces;//アイテム生成場所
 	GameObject[] generateBoxes;//アイテムデータの格納場所
 	[SerializeField] float geneateSpan = 3;
-	float time = 0;
 
     // Start is called before the first frame update
     void Start()
     {
 		generateBoxes = new GameObject[generatePlaces.Length];
-    }
+		InvokeRepeating("FoodGenerate", 0, geneateSpan);
+	}
 
     // Update is called once per frame
     void Update()
     {
-		time += Time.deltaTime;
 
-		if (time > geneateSpan)
-		{
-			FoodGenerate();
-			time = 0;
-		}
     }
 
 	void FoodGenerate()

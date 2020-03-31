@@ -6,25 +6,18 @@ public class FoodGenerater : MonoBehaviour
 {
 	[SerializeField] GameObject[] foods;
 	[SerializeField] GameObject[] generatePlaces;
-	float time = 0;
+	[SerializeField] int generateSpan;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+		InvokeRepeating("FoodGenerate", 0, generateSpan);
+	}
 
     // Update is called once per frame
     void Update()
     {
-		time += Time.deltaTime;
 
-		if (time > 3)
-		{
-			FoodGenerate();
-
-			time = 0;
-		}
     }
 
 	void FoodGenerate()
