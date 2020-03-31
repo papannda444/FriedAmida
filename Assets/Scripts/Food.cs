@@ -13,15 +13,15 @@ public class Food : MonoBehaviour
 
 	int xDirction = 0;
 	float speed = 0.02f;
-	[SerializeField] int clearKomugiko;
-	[SerializeField] int clearEgg;
-	[SerializeField] int clearPanko;
-	[SerializeField] int calorie;
+	[SerializeField] int clearKomugikoNum;
+	[SerializeField] int clearEggNum;
+	[SerializeField] int clearPankoNum;
+	[SerializeField] int calorieNum;
 	[SerializeField] OilTemp oilTemp;
-	int nowKomugiko = 0;
-	int nowEgg = 0;
-	int nowPanko = 0;
-	int nowBadItem = 0;
+	int komugikoCount = 0;
+	int eggCount = 0;
+	int pankoCount = 0;
+	int badItemCount = 0;
 
 	public int XDirection
 	{
@@ -89,22 +89,25 @@ public class Food : MonoBehaviour
 			case "lowOil":
 				DoFry(OilTemp.low);
 				break;
+			case "moderateOil":
+				DoFry(OilTemp.moderate);
+				break;
 			case "highOil":
 				DoFry(OilTemp.high);
 				break;
 
 			//アイテム（パン粉等）
 			case "egg":
-				nowEgg++;
+				eggCount++;
 				break;
 			case "komugiko":
-				nowKomugiko++;
+				komugikoCount++;
 				break;
 			case "panko":
-				nowPanko++;
+				pankoCount++;
 				break;
 			case "badItem":
-				nowBadItem++;
+				badItemCount++;
 				break;
 		}
 	}
@@ -117,19 +120,19 @@ public class Food : MonoBehaviour
 	void DoFry(OilTemp oil)
 	{
 		//マイナスアイテムを取得していれば腐り状態
-		if (nowBadItem >= 1)
+		if (badItemCount >= 1)
 		{
 			Debug.Log("bad");
 		}
 		else
 		{
 			//油の温度が適正、材料全てがノルマ以上取得していれば揚げ成功
-			if (oil == oilTemp && nowEgg >= clearEgg && nowKomugiko >= clearKomugiko && nowPanko >= clearPanko)
+			if (oil == oilTemp && eggCount >= clearEggNum && komugikoCount >= clearKomugikoNum && pankoCount >= clearPankoNum)
 			{
 				Debug.Log("good");
 			}
 			//材料を全く取得していなければ素揚げ、生？
-			else if (nowEgg == 0 && nowKomugiko == 0 && nowPanko == 0)
+			else if (eggCount == 0 && komugikoCount == 0 && pankoCount == 0)
 			{
 				Debug.Log("row");
 			}

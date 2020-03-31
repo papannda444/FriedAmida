@@ -10,9 +10,68 @@ public class LineCursol : MonoBehaviour
 		public List<GameObject> YHLines;
 	}
 
+	class Position
+	{
+		int x = 0;
+		int y = 0;
+		List<HLineList> xHLines;
+
+		public int X
+		{
+			set
+			{
+				if (value < 0)
+				{
+					x = 0;
+				}
+				else if (value >= xHLines.Count - 1)
+				{
+					x = xHLines.Count - 1;
+				}
+				else
+				{
+					x = value;
+				}
+			}
+
+			get
+			{
+				return x;
+			}
+		}
+
+		public int Y
+		{
+			set
+			{
+				if (value < 0)
+				{
+					y = 0;
+				}
+				else if (value >= xHLines[X].YHLines.Count - 1)
+				{
+					y = xHLines[X].YHLines.Count - 1;
+				}
+				else
+				{
+					y = value;
+				}
+			}
+
+			get
+			{
+				return y;
+			}
+		}
+
+		public Position(List<HLineList> xHLines)
+		{
+			this.xHLines = xHLines;
+		}
+	}
+
 	[SerializeField] List<HLineList> XHLines;
-	int nowX = 0;
-	int nowY = 0;
+	Position position;
 
 	enum Direction
 	{
@@ -22,64 +81,16 @@ public class LineCursol : MonoBehaviour
 		Left = 4
 	}
 
-	public int NowX
-	{
-		set
-		{
-			if (value < 0)
-			{
-				nowX = 0;
-			}
-			else if (value >= XHLines.Count-1)
-			{
-				nowX = XHLines.Count - 1;
-			}
-			else
-			{
-				nowX = value;
-			}
-		}
-
-		get
-		{
-			return nowX;
-		}
-	}
-
-	public int NowY
-	{
-		set
-		{
-			if (value < 0)
-			{
-				nowY = 0;
-			}
-			else if (value >= XHLines[NowX].YHLines.Count - 1)
-			{
-				nowY = XHLines[NowX].YHLines.Count - 1;
-			}
-			else
-			{
-				nowY = value;
-			}
-		}
-
-		get
-		{
-			return nowY;
-		}
-	}
-
     // Start is called before the first frame update
     void Start()
     {
-
+		position = new Position(XHLines);
     }
 
     // Update is called once per frame
     void Update()
     {
-		transform.position = XHLines[NowX].YHLines[NowY].transform.position;
+		transform.position = XHLines[position.X].YHLines[position.Y].transform.position;
 
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
@@ -106,7 +117,7 @@ public class LineCursol : MonoBehaviour
 
 	void DrawHLine()
 	{
-		XHLines[NowX].YHLines[NowY].GetComponent<HorizontalLine>().OnObjActivation();
+		XHLines[position.X].YHLines[position.Y].GetComponent<HorizontalLine>().OnObjActivation();
 	}
 
 	void MoveCursol(Direction dir)
@@ -114,16 +125,16 @@ public class LineCursol : MonoBehaviour
 		switch (dir)
 		{
 			case Direction.Up:
-				NowY--;
+				position.Y--;
 				break;
 			case Direction.Down:
-				NowY++;
+				position.Y++;
 				break;
 			case Direction.Right:
-				NowX++;
+				position.X++;
 				break;
 			case Direction.Left:
-				NowX--;
+				position.X--;
 				break;
 		}
 	}
