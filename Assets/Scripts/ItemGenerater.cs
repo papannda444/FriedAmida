@@ -18,7 +18,6 @@ public class ItemGenerater : MonoBehaviour
     void Start()
     {
 		generateBoxes = new GameObject[generatePlaces.Length];
-		InvokeRepeating("FoodGenerate", 0, geneateSpan);
 	}
 
     // Update is called once per frame
@@ -27,49 +26,39 @@ public class ItemGenerater : MonoBehaviour
 
     }
 
-	void FoodGenerate()
+	public void AllItemGenerate(int eggNum, int komugikoNum, int pankoNum, int badItemNum)
 	{
-		//▼生成アイテムの決定
-		int rand = Random.Range(0, 100);
-		Debug.Log(rand);
-		GameObject createObj;
-		if (rand < 10)
-		{
-			createObj = badItem;
-		}
-		else if (rand < 40)
-		{
-			createObj = egg;
-		}
-		else if (rand < 70)
-		{
-			createObj = komugiko;
-		}
-		else
-		{
-			createObj = panko;
-		}
+		FoodGenerate(egg, eggNum);
+		FoodGenerate(komugiko, komugikoNum);
+		FoodGenerate(panko, pankoNum);
+		FoodGenerate(badItem, badItemNum);
+	}
 
-		//▼生成場所の決定
-		List<int> emptyDates = new List<int>();
-
-		int i = 0;
-		foreach(GameObject generateBox in generateBoxes)
+	void FoodGenerate(GameObject createObj, int createNum)
+	{
+		for (int j = 0; j < createNum; j++)
 		{
-			if (generateBox == null)
+			//▼生成場所の決定
+			List<int> emptyDates = new List<int>();
+
+			int i = 0;
+			foreach (GameObject generateBox in generateBoxes)
 			{
-				emptyDates.Add(i);
+				if (generateBox == null)
+				{
+					emptyDates.Add(i);
+				}
+				i++;
 			}
-			i++;
-		}
 
-		if (emptyDates.Count != 0)
-		{
-			rand = Random.Range(0, emptyDates.Count);
-			int generateNum = emptyDates[rand];
+			if (emptyDates.Count != 0)
+			{
+				int rand = Random.Range(0, emptyDates.Count);
+				int generateNum = emptyDates[rand];
 
-		//▼生成
-			generateBoxes[generateNum] = Instantiate(createObj, generatePlaces[generateNum].transform.position, Quaternion.identity);
+				//▼生成
+				generateBoxes[generateNum] = Instantiate(createObj, generatePlaces[generateNum].transform.position, Quaternion.identity);
+			}
 		}
 	}
 }
