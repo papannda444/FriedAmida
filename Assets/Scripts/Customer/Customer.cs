@@ -54,28 +54,51 @@ public class Customer : MonoBehaviour
 
 	public void DoReaction(FriedFood friedFood)
 	{
+		//アニメーション
+		ReactionAnime(friedFood.FryStatus);
+
 		switch (friedFood.FryStatus)
 		{
 			case Cooking.Status.good:
-				//アニメーション
 				//スコア加算
 				//ラッシュゲージ加算
 				break;
 			case Cooking.Status.usually:
-				//アニメーション
 				//スコア加算	
 				break;
 			case Cooking.Status.raw:
-				//アニメーション
 				//スコア加算
 				break;
 			case Cooking.Status.bad:
-				//アニメーション
 				//スコア加算
 				break;
 		}
 
 		//クリア判定
 		IsClear = true;
+	}
+
+	void ReactionAnime(Cooking.Status status)
+	{
+		Debug.Log("anime");
+		switch (status)
+		{
+			case Cooking.Status.good:
+				animator.SetBool("good", true);
+				animator.SetBool("angry", false);
+				break;
+			case Cooking.Status.usually:
+				animator.SetBool("good", false);
+				animator.SetBool("angry", false);
+				break;
+			case Cooking.Status.raw:
+				animator.SetBool("good", false);
+				animator.SetBool("angry", false);
+				break;
+			case Cooking.Status.bad:
+				animator.SetBool("good", false);
+				animator.SetBool("angry", true);
+				break;
+		}
 	}
 }

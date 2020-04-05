@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	/* 
-	 　「すごくいやらしいコードだな、この変態！」
-	   「ダ、ダメ、見ないで！」
-	   「こんなに（処理）をグチャグチャにして、そんなにこれ（バグ）が欲しいのか？」
-	   「ヤダ！漏れちゃう、（処理が）漏れちゃう！」
-	*/
 	[SerializeField] GameObject stageManager;
 	StageManager st;
 	[SerializeField] GameObject foodGenerater;
@@ -72,6 +66,7 @@ public class GameManager : MonoBehaviour
 				//6：敵が倒れればループを抜ける
 				if (presentCustomer.IsClear)
 				{
+					Destroy(presentEnemyObj);
 					break;
 				}
 			}
