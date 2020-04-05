@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3605081100778342536}
   - component: {fileID: 3605081100778342537}
   - component: {fileID: 4379993325423887224}
+  - component: {fileID: 5783388772285592072}
   m_Layer: 0
   m_Name: OilBox
   m_TagString: box
@@ -106,3 +107,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5783388772285592072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605081100778342538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252844b48eafeb24096c261e33adcb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  oilTemp: 0

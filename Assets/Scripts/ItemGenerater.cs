@@ -18,7 +18,6 @@ public class ItemGenerater : MonoBehaviour
     void Start()
     {
 		generateBoxes = new GameObject[generatePlaces.Length];
-		InvokeRepeating("FoodGenerate", 0, geneateSpan);
 	}
 
     // Update is called once per frame
@@ -27,49 +26,50 @@ public class ItemGenerater : MonoBehaviour
 
     }
 
-	void FoodGenerate()
+	//！関数名が微妙！
+	public void InitializeItems(int eggNum, int komugikoNum, int pankoNum, int badItemNum)
 	{
-		//▼生成アイテムの決定
-		int rand = Random.Range(0, 100);
-		Debug.Log(rand);
-		GameObject createObj;
-		if (rand < 10)
+		//▼マップ上のアイテムを全破棄
+		foreach(GameObject obj in generateBoxes)
 		{
-			createObj = badItem;
-		}
-		else if (rand < 40)
-		{
-			createObj = egg;
-		}
-		else if (rand < 70)
-		{
-			createObj = komugiko;
-		}
-		else
-		{
-			createObj = panko;
-		}
-
-		//▼生成場所の決定
-		List<int> emptyDates = new List<int>();
-
-		int i = 0;
-		foreach(GameObject generateBox in generateBoxes)
-		{
-			if (generateBox == null)
+			if (obj != null)
 			{
-				emptyDates.Add(i);
+				Destroy(obj);
 			}
-			i++;
 		}
 
-		if (emptyDates.Count != 0)
-		{
-			rand = Random.Range(0, emptyDates.Count);
-			int generateNum = emptyDates[rand];
+		//▼アイテム生成
+		ItemGenerate(egg, eggNum);
+		ItemGenerate(komugiko, komugikoNum);
+		ItemGenerate(panko, pankoNum);
+		ItemGenerate(badItem, badItemNum);
+	}
 
-		//▼生成
-			generateBoxes[generateNum] = Instantiate(createObj, generatePlaces[generateNum].transform.position, Quaternion.identity);
+	void ItemGenerate(GameObject createObj, int createNum)
+	{
+		for (int j = 0; j < createNum; j++)
+		{
+			//▼生成場所の決定
+			List<int> emptyDates = new List<int>();
+
+			int i = 0;
+			foreach (GameObject generateBox in generateBoxes)
+			{
+				if (generateBox == null)
+				{
+					emptyDates.Add(i);
+				}
+				i++;
+			}
+
+			if (emptyDates.Count != 0)
+			{
+				int rand = Random.Range(0, emptyDates.Count);
+				int generateNum = emptyDates[rand];
+
+				//▼生成
+				generateBoxes[generateNum] = Instantiate(createObj, generatePlaces[generateNum].transform.position, Quaternion.identity);
+			}
 		}
 	}
 }

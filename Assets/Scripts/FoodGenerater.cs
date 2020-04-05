@@ -11,7 +11,7 @@ public class FoodGenerater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		InvokeRepeating("FoodGenerate", 0, generateSpan);
+		//InvokeRepeating("FoodGenerate", 0, generateSpan);
 	}
 
     // Update is called once per frame
@@ -20,12 +20,22 @@ public class FoodGenerater : MonoBehaviour
 
     }
 
+	//●単純にずらして食材を生成しているだけなので改良の必要あり●
+	//●オーバーロードっぽく見えるのも気になる●
+	public void FoodsGenerate(int genetateNum)
+	{
+		for(int i = 0; i < genetateNum; i++)
+		{
+			Invoke("FoodGenerate", i * generateSpan);
+		}
+	}
+
 	void FoodGenerate()
 	{
 		GameObject item;
 		GameObject place;
 
-		//▼生成アイテムの決定
+		//▼生成食材の決定
 		int rand = Random.Range(0, foods.Length);
 		item = foods[rand];
 
