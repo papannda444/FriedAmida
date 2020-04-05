@@ -26,15 +26,26 @@ public class ItemGenerater : MonoBehaviour
 
     }
 
-	public void AllItemGenerate(int eggNum, int komugikoNum, int pankoNum, int badItemNum)
+	//！関数名が微妙！
+	public void InitializeItems(int eggNum, int komugikoNum, int pankoNum, int badItemNum)
 	{
-		FoodGenerate(egg, eggNum);
-		FoodGenerate(komugiko, komugikoNum);
-		FoodGenerate(panko, pankoNum);
-		FoodGenerate(badItem, badItemNum);
+		//▼マップ上のアイテムを全破棄
+		foreach(GameObject obj in generateBoxes)
+		{
+			if (obj != null)
+			{
+				Destroy(obj);
+			}
+		}
+
+		//▼アイテム生成
+		ItemGenerate(egg, eggNum);
+		ItemGenerate(komugiko, komugikoNum);
+		ItemGenerate(panko, pankoNum);
+		ItemGenerate(badItem, badItemNum);
 	}
 
-	void FoodGenerate(GameObject createObj, int createNum)
+	void ItemGenerate(GameObject createObj, int createNum)
 	{
 		for (int j = 0; j < createNum; j++)
 		{

@@ -1,24 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Amida;
 
 public class Customer : MonoBehaviour
-{
-	enum FoodReview
+{	
+	[System.SerializableAttribute]
+	public class ItemNums
 	{
-		good,
-		usually,
-		row,
-		bad
+		public int eggNum;
+		public int komugikoNum;
+		public int pankoNum;
+		public int badItemNum;
 	}
 
+	//▼アイテム関連
 	int synchroFoodNum = 1;
-	Animator animator;
-	[SerializeField] bool hasCalorie;
-	[SerializeField] bool boss;
+	public int SynchroFoodNum
+	{
+		get { return synchroFoodNum; }
+		private set { synchroFoodNum = value; }
+	}
 
-    // Start is called before the first frame update
-    void Start()
+	[SerializeField] ItemNums appearItemNums;
+	public ItemNums AppearItemNum
+	{
+		get { return this.appearItemNums; }
+		private set { appearItemNums = value; }
+	}
+
+	//▼アニメーション関連
+	Animator animator;
+
+	//▼クリア判定
+	bool isClear = false;
+	public bool IsClear
+	{
+		get { return isClear; }
+		private set { isClear = value; }
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
 		animator = GetComponent<Animator>();
     }
@@ -29,40 +52,30 @@ public class Customer : MonoBehaviour
         
     }
 
-	void DoAction()
+	public void DoReaction(FriedFood friedFood)
 	{
-		//食材抽選
-	}
-
-	void DoReaction(FoodReview foodReview)
-	{
-		switch (foodReview)
+		switch (friedFood.FryStatus)
 		{
-			case FoodReview.good:
+			case Cooking.Status.good:
 				//アニメーション
 				//スコア加算
 				//ラッシュゲージ加算
 				break;
-			case FoodReview.usually:
+			case Cooking.Status.usually:
+				//アニメーション
+				//スコア加算	
+				break;
+			case Cooking.Status.raw:
 				//アニメーション
 				//スコア加算
 				break;
-			case FoodReview.row:
-				//アニメーション
-				//スコア加算
-				break;
-			case FoodReview.bad:
+			case Cooking.Status.bad:
 				//アニメーション
 				//スコア加算
 				break;
 		}
 
 		//クリア判定
-		judgeClear();
-	}
-
-	void judgeClear()
-	{
-
+		IsClear = true;
 	}
 }

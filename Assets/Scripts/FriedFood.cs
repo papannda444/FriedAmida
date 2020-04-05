@@ -1,23 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Amida;
 
-public class FriedFood : MonoBehaviour
+public class FriedFood
 {
-	public enum Status
-	{
-		good,
-		usually,
-		raw,
-		bad
-	}
+	public Cooking.Status FryStatus { get; private set; }
+	public int Calorie { get; private set; }
 
-	Status status;
-	int calorie;
-
-	public FriedFood(Status status, int calorie)
+	public FriedFood(Cooking.Status status, int calorie)
 	{
-		this.status = status;
-		this.calorie = calorie;
+		this.FryStatus = status;
+		this.Calorie = calorie;
 	}
 }
