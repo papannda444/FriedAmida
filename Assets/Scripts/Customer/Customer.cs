@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Amida;
+using System;
 
 public class Customer : MonoBehaviour
-{	
+{
 	[System.SerializableAttribute]
 	public class ItemNums
 	{
@@ -37,20 +38,30 @@ public class Customer : MonoBehaviour
 	public bool IsClear
 	{
 		get { return isClear; }
-		private set { isClear = value; }
+		private set
+		{
+			isClear = value;
+			if (isClear == true)
+			{
+				killedCustomerDelegate();
+			}
+		}
 	}
+
+	public delegate void KilledCustomerDelegate();
+	public KilledCustomerDelegate killedCustomerDelegate;
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		animator = GetComponent<Animator>();
-    }
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Update is called once per frame
+	void Update()
+	{
+
+	}
 
 	public void DoReaction(FriedFood friedFood)
 	{

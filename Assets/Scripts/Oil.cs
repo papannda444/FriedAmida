@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Amida;
+using System;
 
 public class Oil : MonoBehaviour
 {
-	[SerializeField] GameObject GameManager;
-	GameManager gm;
 	[SerializeField] Cooking.OilTemp oilTemp;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-		gm = GameManager.GetComponent<GameManager>();
-    }
+	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
+	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -30,7 +32,7 @@ public class Oil : MonoBehaviour
 			food = collision.gameObject.GetComponent<Food>();
 			FriedFood friedFood;
 			friedFood = food.DoFry(oilTemp);
-			gm.MadeFriedFood = friedFood;
+			completedFriedFoodDelegate(friedFood);
 			Destroy(collision.gameObject);
 		}
 	}

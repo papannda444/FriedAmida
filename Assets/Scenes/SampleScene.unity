@@ -118,6 +118,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 481544688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &23768403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3605081100778342538, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+    type: 3}
+  m_PrefabInstance: {fileID: 1883413624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &38574766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8257149241707419006, guid: f1a43b9e5773a8e44acffd34fea0f216,
@@ -857,6 +863,12 @@ Transform:
   m_Father: {fileID: 947819757}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &541982956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3605081100778342538, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+    type: 3}
+  m_PrefabInstance: {fileID: 431583347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &580754389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8257149241707419006, guid: f1a43b9e5773a8e44acffd34fea0f216,
@@ -924,6 +936,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageManager: {fileID: 235228150}
   foodGenerater: {fileID: 1419647444}
+  oilObjs:
+  - {fileID: 1616065982}
+  - {fileID: 1411359137}
+  - {fileID: 541982956}
+  - {fileID: 23768403}
 --- !u!4 &658604814
 Transform:
   m_ObjectHideFlags: 0
@@ -1953,6 +1970,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1407014860}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1411359137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3605081100778342538, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+    type: 3}
+  m_PrefabInstance: {fileID: 700609444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1419647444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,6 +2324,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8257149241707418992, guid: f1a43b9e5773a8e44acffd34fea0f216,
     type: 3}
   m_PrefabInstance: {fileID: 1584667057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1616065982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3605081100778342538, guid: d458e9f4bb0b0c74b885706c7f5b3610,
+    type: 3}
+  m_PrefabInstance: {fileID: 3605081101957686411}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1622178647
 PrefabInstance:
