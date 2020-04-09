@@ -39,8 +39,18 @@ public class Customer : MonoBehaviour
 	{
 		get { return isClear; }
 		//GameManagerにCutomerを倒したことを表すメソッドをデリゲートで渡す
-		private set { isClear = value; }
+		private set
+		{
+			isClear = value;
+			if (isClear)
+			{
+				killedCustomerDelegate();
+			}
+		}
 	}
+
+	public delegate void KilledCustomerDelegate();
+	public KilledCustomerDelegate killedCustomerDelegate;
 
 	// Start is called before the first frame update
 	void Start()

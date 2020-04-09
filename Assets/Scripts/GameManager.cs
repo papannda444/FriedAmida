@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
 
+	[SerializeField] GameObject[] oilObjs;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
-	public FriedFood MadeFriedFood;
 
 	//●Playerクラスに分ける可能性あり●
 	int rushGage;
@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		Invoke("GameStart", 1);
-    }
+		Invoke("GameStart", 0.5f);
+	}
 
     // Update is called once per frame
     void Update()
@@ -30,56 +30,49 @@ public class GameManager : MonoBehaviour
 
 	void GameStart()
 	{
-		StartCoroutine(gameStart());
-	}
+		//１：次の戦闘準備
+		currentEnemyObj = stageManager.NextBattleStart();
+		currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
-	IEnumerator gameStart()
-	{
-		//消したい
-		//敵が全員倒されるまでループ
-		while (true)
+		currentCustomer.killedCustomerDelegate = KilledCustomer;
+
+		foreach (GameObject oilObj in oilObjs)
 		{
-			//１：次の戦闘準備
-			currentEnemyObj = stageManager.NextBattleStart();
-			currentCustomer = currentEnemyObj.GetComponent<Customer>();
-
-			//敵が倒されるまでループ
-			while (true)
-			{
-				MadeFriedFood = null;
-
-				//2：敵に応じた食材生成
-				foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);
-
-				//消したい
-				//3：揚げ物を受け取るまでループ
-				while (MadeFriedFood == null)
-				{
-					yield return null;
-				}
-
-				//4：揚げ物を敵に渡す
-				//5：敵による揚げ物評価(スコア処理未実装）
-				currentCustomer.DoReaction(MadeFriedFood);
-
-				//客のリアクションを見せるため1秒止める
-				yield return new WaitForSeconds(1);
-
-				//6：敵が倒れればループを抜ける
-				if (currentCustomer.IsClear)
-				{
-					Destroy(currentEnemyObj);
-					break;
-				}
-			}
-
-			//７：現在の敵が最後の敵であればループを抜ける
-			if (stageManager.IsLastEnemy())
-			{
-				break;
-			}
+			oilObj.GetComponent<Oil>().completedFriedFoodDelegate = CompletedFriedFood;
 		}
 
+		//2：敵に応じた食材生成
+		foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);
+	}
+
+	void KilledCustomer()
+	{
+		Destroy(currentEnemyObj);
+
+		if (stageManager.IsLastEnemy())
+		{
+			ClearGame();
+			return;
+		}
+
+		currentEnemyObj = stageManager.NextBattleStart();
+		currentCustomer = currentEnemyObj.GetComponent<Customer>();
+
+		currentCustomer.killedCustomerDelegate = KilledCustomer;
+	}
+
+	void CompletedFriedFood(FriedFood friedFood)
+	{
+		//3：揚げ物を敵に渡す
+		// ：敵による揚げ物評価(スコア処理未実装）
+		currentCustomer.DoReaction(friedFood);
+
+		//2：敵に応じた食材生成
+		foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);
+	}
+
+	void ClearGame()
+	{
 		//８：スコア表示等
 
 		//9：次のステージへ
