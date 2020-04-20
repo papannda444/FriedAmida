@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Trash : MonoBehaviour
 {
-	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
-	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
+	public Oil.CompletedFriedFoodDelegate completedFriedFoodDelegate;
 
 	[SerializeField] GameObject HighOil;
 	[SerializeField] GameObject ModerateOil;
@@ -54,6 +53,8 @@ public class Trash : MonoBehaviour
 					createdOil = Instantiate(LowOil, transform.position, Quaternion.identity);
 					break;
 			}
+			//●めっちゃ微妙な処理●
+			createdOil.GetComponent<Oil>().completedFriedFoodDelegate = completedFriedFoodDelegate;
 		}
 		else
 		{
